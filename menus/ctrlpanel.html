@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,200..1000;1,200..1000&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=menu" />
+    <link rel="stylesheet" href="sidepanel.css">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DeskPal Control Panel</title>
+    <img rel="icon" type="image/x-icon" href="resources/100x100u.ico">
+</head>
+<body>
+    <div class="container">
+        <button class="sidepaneltoggle"><span class="material-symbols-outlined">
+            menu
+            </span></button>
+        
+        <a href="ctrlpanel.html"><button class="sidepanelbuttons">Dashboard</button></a>
+        <a href="aichat.html"><button class="sidepanelbuttons">AI Chat</button></a>
+        <a href="settings.html"><button class="sidepanelbuttons">General Settings</button></a>
+        <a href="customization.html"><button class="sidepanelbuttons">Personalization</button></a>
+        <a href="about.html"><button class="sidepanelbuttons">Info</button></a>
+        </div>
+        <div class="Title">
+            <p class="Realtitle">Dashboard</p>
+            <div>
+                <a href=""><button class="launch"><p class="btntext">Launch Pet</p><p class="btntextsmall">Activate your own personal pal!</p></button></a>
+            </div>
+        </div>
+        
+
+    <script src="sidepanel.js">
+
+    </script>
+
+    <style>
+        body {
+            background-color: white;
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100%;
+        }
+        
+        .material-symbols-outlined {
+            font-variation-settings: 
+            'FILL' 0, 
+            'wght' 400, 
+            'GRAD' 0, 
+            'opsz' 24;
+        }
+        
+        .mulish-Mulish {
+            font-family: "Mulish", sans-serif;
+            font-weight: 100;
+            font-style: normal;
+        }
+        
+        .Title{
+            position:absolute;
+            left:100px;
+            
+            max-width:calc(100% - 100px);
+            width:100%;
+            font-family:"Mulish", sans-serif;
+            font-weight:800;
+            font-size:x-large;
+            user-select:none;
+            top:50px;
+            transition: left 0.3s linear;
+        }
+
+        .Realtitle{
+            
+            
+            max-width:100%;
+            width:100%;
+            
+            font-family:"Mulish", sans-serif;
+            font-weight:800;
+            font-size:x-large;
+            user-select:none;
+            top:50px;
+            
+        }
+
+        .launch{
+            max-width:100%;
+            
+            height:300px;
+            width: calc(100% - 40px);
+            background-image:url("resources/launch.png");
+            font-family:"Mulish", sans-serif;
+            text-align:left;
+            font-size:50px;
+            color:white;
+            cursor: pointer;
+            
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            border:none;
+            border-radius: 30px 30px 30px 30px;
+            user-select:none;
+            
+            
+            
+            
+        }
+
+        .btntext{
+            padding-left:30px;
+            padding-top:150px;
+            font-weight:600;
+            padding-bottom:0px;
+            margin:0;
+
+
+        }
+
+        .btntextsmall{
+            padding-left:30px;
+            padding-top:0;
+            font-size:18px;
+            padding-top:0;
+            padding-bottom: 0;
+            margin: 0;
+
+        }
+
+        
+
+
+
+
+        
+    </style>
+</body>
+</html>

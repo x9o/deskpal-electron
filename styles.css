@@ -1,0 +1,74 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background-color: transparent;
+}
+
+#pet-container {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  position: fixed;
+  pointer-events: none; 
+}
+
+#pet {
+  display: block;
+  margin: 0 auto;
+  pointer-events: auto; 
+  cursor: pointer;
+}
+
+
+#speechbubble {
+  position: absolute;
+  left: calc(100% - 60px);  
+  top: -25px;  
+  height: 55px;
+  width: 64px;
+  transform: translateX(-50%);  
+  visibility: hidden;
+}
+
+
+#caption {
+  margin-top: 10px;
+  font-family: "Tiny5", sans-serif;
+  color: black;
+  font-size: 13px;
+  background-color: white;
+  border-style: dotted;
+  border-radius: 5px;
+  padding: 4px;
+  font-weight: 400;
+  font-style: normal;
+  pointer-events: none; 
+  width: 200px;
+  min-height: 39px;         
+  height: auto;             
+  overflow-wrap: break-word; 
+}
+
+
+.input {
+  margin-top: 20px;
+  visibility: hidden;
+}
+
+#input {
+  pointer-events: auto; 
+  cursor: pointer;
+}
+
+
+#inputbox {
+  padding: 5px;
+  border-radius: 5px;
+  font-family: "Tiny5", sans-serif;
+  color: white;
+  background-color: grey; 
+}

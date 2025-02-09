@@ -1,7 +1,7 @@
 from flask import Flask, jsonify, request
 from flask_cors import CORS
 from characterai import aiocai
-import json, asyncio, threading
+import json, asyncio, threading, requests
 from queue import Queue
 from concurrent.futures import ThreadPoolExecutor
 
@@ -11,6 +11,8 @@ CORS(app)
 config = json.load(open('settings_python.json'))
 client = aiocai.Client(config['cai-token'])
 char = config['cai-char-id']
+voiceid = config['voice-id']
+token = config['cai-token']
 
 
 chat_connection = None
@@ -19,7 +21,6 @@ response_queue = Queue()
 processing = threading.Event()
 
 async def maintain_chat_connection():
-    
     global chat_connection
     while True:
         try:
@@ -34,7 +35,24 @@ async def maintain_chat_connection():
                     chat_id="91b31981-860c-48d2-b7fd-6248e61ee4fa",
                     text=message
                 )
-                response_queue.put(response.text)
+                # Get the audio URL
+                datax = response.model_dump()
+                audio_response = requests.post(
+                    "https://neo.character.ai/multimodal/api/v1/memo/replay",
+                    headers={"Authorization": f"Token {token}"},
+                    json={
+                        "roomId": datax['turn_key']['chat_id'],
+                        "turnId": datax['turn_key']['turn_id'],
+                        "candidateId": datax['candidates'][0]['candidate_id'],
+                        "voiceId": voiceid
+                    }
+                )
+                  # Extract the audio URL
+               
+                print('Audio URL:', audio_response.json()["replayUrl"])
+                
+                # Put both text and audio URL in the response queue
+                response_queue.put({"text": response.text, "audio_url": audio_response.json()["replayUrl"]})
                 processing.clear()
                 message_queue.task_done()
             
@@ -61,7 +79,7 @@ def getmessage():
     
     try:
         response = response_queue.get(timeout=30)
-        return jsonify({"message": response})
+        return jsonify(response)  # Return both text and audio URL
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 

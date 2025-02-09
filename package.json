@@ -33,6 +33,8 @@
   },
   "dependencies": {
     "active-win": "^8.2.1",
-    "axios": "^1.7.7"
+    "audic": "^3.0.2",
+    "axios": "^1.7.7",
+    "howler": "^2.2.4"
   }
 }

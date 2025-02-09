@@ -51,12 +51,20 @@ function mainPet() {
         const response = await axios.post('http://localhost:5000/api/data', {
             input_text: message
         });
-        const replyMessage = response.data.message;
-        mainWindow.webContents.send('chat-reply', replyMessage);
+
+        console.log('API Response:', response.data);  
+        const replyMessage = response.data.text;
+        const audioUrl = response.data.audio_url;
+
+        // Send the reply message to the renderer process
+        mainWindow.webContents.send('chat-reply', { replyMessage, audioUrl });
+
+        
+        
     } catch (error) {
         console.error('Error communicating with Flask API:', error);
     }
-});
+  });
 
 
   setInterval(async () => {

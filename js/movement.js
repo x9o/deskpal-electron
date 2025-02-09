@@ -9,7 +9,7 @@ const settings = require('./settings.json');
 const pet = 'dog';
 
 // Array of idle animations
-const idleAnimations = ['assets/dog/ball.gif', 'assets/dog/cold.gif', 'assets/dog/wink.gif'];
+const idleAnimations = ['assets/dog/ball.gif', 'assets/dog/whatsup.gif', 'assets/dog/wink.gif'];
 
 function getRandomIdleAnimation() {
     const randomIndex = Math.floor(Math.random() * idleAnimations.length);

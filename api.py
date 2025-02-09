@@ -47,9 +47,7 @@ async def maintain_chat_connection():
                         "voiceId": voiceid
                     }
                 )
-                  # Extract the audio URL
-               
-                print('Audio URL:', audio_response.json()["replayUrl"])
+                  
                 
                 # Put both text and audio URL in the response queue
                 response_queue.put({"text": response.text, "audio_url": audio_response.json()["replayUrl"]})

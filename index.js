@@ -52,7 +52,7 @@ function mainPet() {
             input_text: message
         });
 
-        console.log('API Response:', response.data);  
+          
         const replyMessage = response.data.text;
         const audioUrl = response.data.audio_url;
 

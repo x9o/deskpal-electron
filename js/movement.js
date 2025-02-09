@@ -6,27 +6,36 @@ let isMoving = false;
 let currentPosX = 0;
 let currentPosY = 0;
 const settings = require('./settings.json');
+const pet = 'dog';
+
+// Array of idle animations
+const idleAnimations = ['assets/dog/ball.gif', 'assets/dog/cold.gif', 'assets/dog/wink.gif'];
+
+function getRandomIdleAnimation() {
+    const randomIndex = Math.floor(Math.random() * idleAnimations.length);
+    return idleAnimations[randomIndex];
+}
 
 function cursorMovement() {
     const rect = petContainer.getBoundingClientRect();
     const currentX = window.scrollX + rect.left + rect.width / 2;
     const currentY = window.scrollY + rect.top + rect.height / 2;
-    
+
     const deltaX = mouseX - currentX;
     const deltaY = mouseY - currentY;
-    
+
     currentPosX += deltaX * 0.005;
     currentPosY += deltaY * 0.005;
-    
+
     const isMovingNow = Math.abs(deltaX) > 5 || Math.abs(deltaY) > 5; // x or y bigger than 5 (boolean)
-    
+
     if (isMovingNow !== isMoving) {
         isMoving = isMovingNow;
-        petImage.src = isMoving ? 'assets/fox_run.gif' : 'assets/fox_idle.gif'; // if moving turn to run gif if not idle gif
+        petImage.src = isMoving ? 'assets/dog/bored.gif' : getRandomIdleAnimation(); // Use random idle animation
     }
 
     petContainer.style.transform = `translate(${currentPosX}px, ${currentPosY}px)`;
-    requestAnimationFrame(cursorMovement); 
+    requestAnimationFrame(cursorMovement);
 }
 
 function randomMovement() {
@@ -36,7 +45,6 @@ function randomMovement() {
     const padding = 20;
 
     function getRandomWalkSpeed() {
-        
         return 0.2 + Math.random() * 1.1;
     }
 
@@ -68,24 +76,23 @@ function randomMovement() {
 
     function startNewWalk() {
         const angle = Math.random() * 2 * Math.PI;
-        
+
         currentDirection = {
             x: Math.cos(angle),
             y: Math.sin(angle)
         };
-        
-        
+
         currentWalkSpeed = getRandomWalkSpeed();
-        
+
         isWalking = true;
         isMoving = true;
-        petImage.src = 'assets/fox_run.gif';
-        
-        const walkDuration = 2000 + Math.random() * 2000;
+        petImage.src = 'assets/dog/bored.gif';
+
+        const walkDuration = 2000 + Math.random() * 2000; // Random walk duration
         setTimeout(() => {
             isWalking = false;
             isMoving = false;
-            petImage.src = 'assets/fox_idle.gif';
+            petImage.src = getRandomIdleAnimation(); // Use random idle animation
         }, walkDuration);
     }
 
@@ -96,9 +103,9 @@ function randomMovement() {
 
             currentPosX += currentDirection.x * currentWalkSpeed;
             currentPosY += currentDirection.y * currentWalkSpeed;
-            
+
             petContainer.style.transform = `translate(${currentPosX}px, ${currentPosY}px)`;
-            
+
             if (!keepInBounds()) {
                 currentDirection.x *= -1;
                 currentDirection.y *= -1;

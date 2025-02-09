@@ -37,21 +37,32 @@ document.addEventListener('DOMContentLoaded', () => {
                     input.style.visibility = 'hidden';
                     inputbox.value = '';
                     speechbubble.style.visibility = 'visible';
+                    pet.src = 'assets/dog/interogative.gif';
 
                     
                 }
             });
 
+            let currentAudio = null;
+
             ipcRenderer.on('chat-reply', (event, { replyMessage, audioUrl }) => {
                 caption.textContent = replyMessage;
                 speechbubble.style.visibility = 'hidden';
                 if (audioUrl) {
-                    console.log('Playing audio from URL:', audioUrl);
-                    const audio = new Audio(audioUrl); // Create a new audio object
-                    audio.play().catch((error) => {
-                      console.error('Error while playing audio:', error);
+                    
+                    
+                    // If there is already an audio playing, pause it
+                    if (currentAudio) {
+                        currentAudio.pause(); // Pause the currently playing audio
+                        currentAudio.currentTime = 0; // Reset the audio to the start
+                    }
+                    
+                    // Create a new audio object and store it in currentAudio
+                    currentAudio = new Audio(audioUrl);
+                    currentAudio.play().catch((error) => {
+                        console.error('Error while playing audio:', error);
                     });
-                  }
+                }
 
                 
             });

@@ -1,4 +1,5 @@
 {
-    "pet-movement-mode": "random", 
-    "pet-click-action": "chat"
+    "pet-movement-mode": "idle", 
+    "pet-click-action": "chat",
+    "systeminfo-enabled": true
 }

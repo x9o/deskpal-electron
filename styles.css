@@ -8,19 +8,21 @@ html, body {
 }
 
 #pet-container {
-  top: 50%;
-  left: 50%;
+  top: 100px; /* Initial position */
+  left: 100px;
   transform: translate(-50%, -50%);
   text-align: center;
-  position: fixed;
+  position: absolute;
   pointer-events: none; 
+  transition: transform 0.1s ease;
+  user-select: none;
 }
 
 #pet {
   display: block;
   margin: 0 auto;
   pointer-events: auto; 
-  cursor: pointer;
+  cursor: grab;
 }
 
 

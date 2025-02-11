@@ -9,4 +9,4 @@ random pet movement should be broken now, use idle, cursor still works
 Edit by H: Dude really treats this seriously :skull: 
 Bro thinks we are working in Microsoft :skull:
 
-We gonna beat Microsoft with this one:fire::fire: Linux is king!!! Deskpal will be the next best AI!!! :fire: Down with OpenAI and Deepseek :fire: Deskpal no monetization!!!!!! Deskpal + BlueLinux = Microsoft ender!!!:fire:
+We gonna beat Microsoft with this one :fire: :fire: Linux is king!!! Deskpal will be the next best AI!!! :fire: Down with OpenAI and Deepseek :fire: Deskpal no monetization!!!!!! Deskpal + BlueLinux = Microsoft ender!!! :fire:

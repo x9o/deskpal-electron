@@ -1,6 +1,6 @@
 # todolist
 
-Placeholerr assets for pets ✅ Background application (unaffects cursor) ✅ -> Basic movment ✅ AI chat ✅ Basic dashboard ✅❌ -> AI voice (c.ai built in vc) ✅ -> Screen time reminders -> Calendar reminders -> random prompts -> Computer vision mood tracking and pupil detection -> settings dashboard -> find better assets -> Safety features -> advanced animations (different idle animations, day night cycle) -> dynamic movement -> algorithm'
+Placeholerr assets for pets ✅ Background application (unaffects cursor) ✅ -> Basic movment ✅ Placeholder AI chat ✅ Basic dashboard ✅❌ -> AI voice (c.ai built in vc) ✅ -> Screen time reminders -> Find suitable AI (c.ai) -> Calendar reminders❓ -> Better prompts -> Computer vision mood tracking and pupil detection -> Better movement and accessibility ->  Find/Create better assets -> Safety features❓ -> advanced animations (different idle animations, day night cycle)❓ -> algorithm❓
 
 # notes
 

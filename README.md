@@ -9,8 +9,13 @@ random pet movement should be broken now, use idle, cursor still works
 Edit by H: Dude really treats this seriously :skull: 
 Bro thinks we are working in Microsoft :skull:
  _      _____ _   _ _    ___   __        _____ _____  _____ _______ _____   ____  
+ 
 | |    |_   _| \ | | |  | \ \ / /       |  __ \_   _|/ ____|__   __|  __ \ / __ \ 
+
 | |      | | |  \| | |  | |\ V /        | |  | || | | (___    | |  | |__) | |  | |
+
 | |      | | | . ` | |  | | > <         | |  | || |  \___ \   | |  |  _  /| |  | |
+
 | |____ _| |_| |\  | |__| |/ . \        | |__| || |_ ____) |  | |  | | \ \| |__| |
+
 |______|_____|_| \_|\____//_/ \_\       |_____/_____|_____/   |_|  |_|  \_\\____/ 

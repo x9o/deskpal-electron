@@ -131,7 +131,7 @@ document.addEventListener('DOMContentLoaded', () => {
             
             input.addEventListener('keydown', (event) => {
                 if (event.key === 'Enter') {
-                    ipcRenderer.send('chat', inputbox.value, 'u1WMot2UbiJ-0Dcz6conK8lkG1QVEFyT5U1q6mT-Po8', '91b31981-860c-48d2-b7fd-6248e61ee4fa');
+                    ipcRenderer.send('chat', inputbox.value, '2rkbtvJYU45f6nVcrlfPlPpMDKXeRbusqadaYwCCA8w', '90bd3386-10b3-4ac6-baa4-fc2ecfbdd702');
                     console.log(inputbox.value)
                     input.style.visibility = 'hidden';
                     

@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // const movementmode = 'random';
 
     // Array of idle animations
-    const idleAnimations = ['assets/dog/ball.gif', 'assets/dog/cold.gif', 'assets/dog/wink.gif'];
+    const idleAnimations = ['assets/dog/ball.gif', 'assets/dog/cold.gif', 'assets/dog/wink.gif', 'assets/dog/whatsup.gif'];
 
     function getRandomIdleAnimation() {
         const randomIndex = Math.floor(Math.random() * idleAnimations.length);

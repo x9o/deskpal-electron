@@ -46,10 +46,12 @@ function mainPet() {
     mainWindow.setIgnoreMouseEvents(true, { forward: true });
   });
 
-  ipcMain.on('chat', async (event, message) => {
+  ipcMain.on('chat', async (event, message, char, chat) => {
     try {
         const response = await axios.post('http://localhost:5000/api/data', {
-            input_text: message
+            input_text: message,
+            char_id: char,
+            chat_id: chat
         });
 
           

@@ -10,10 +10,8 @@ CORS(app)
 
 config = json.load(open('settings_python.json'))
 client = aiocai.Client(config['cai-token'])
-char = config['cai-char-id']
 voiceid = config['voice-id']
 token = config['cai-token']
-
 
 chat_connection = None
 message_queue = Queue()
@@ -29,12 +27,19 @@ async def maintain_chat_connection():
             
             if not message_queue.empty() and not processing.is_set():
                 processing.set()
-                message = message_queue.get()
+                # Retrieve message, char_id, and chat_id from the queue
+                data = message_queue.get()
+                message = data["message"]
+                char_id = data["char_id"]
+                chat_id = data["chat_id"]
+                print(message)
+                # Use the provided char_id and chat_id in the send_message function
                 response = await chat_connection.send_message(
-                    char=char,
-                    chat_id="91b31981-860c-48d2-b7fd-6248e61ee4fa",
+                    char=char_id,
+                    chat_id=chat_id,
                     text=message
                 )
+                
                 # Get the audio URL
                 datax = response.model_dump()
                 audio_response = requests.post(
@@ -47,7 +52,6 @@ async def maintain_chat_connection():
                         "voiceId": voiceid
                     }
                 )
-                  
                 
                 # Put both text and audio URL in the response queue
                 response_queue.put({"text": response.text, "audio_url": audio_response.json()["replayUrl"]})
@@ -66,16 +70,21 @@ async def maintain_chat_connection():
 @app.route('/api/data', methods=['POST'])
 def getmessage():
     data = request.get_json()
-    ms = data.get('input_text', 'default message')
-    
+    message = data.get('input_text', 'default message')
+    char_id = data.get('char_id', 'default_char_id')  # Get char_id from the request
+    chat_id = data.get('chat_id', 'default_chat_id')  # Get chat_id from the request
+
+    # Clear any existing messages in the queues
     while not message_queue.empty():
         message_queue.get()
     while not response_queue.empty():
         response_queue.get()
     
-    message_queue.put(ms)
+    # Add the message, char_id, and chat_id to the message queue
+    message_queue.put({"message": message, "char_id": char_id, "chat_id": chat_id})
     
     try:
+        # Wait for a response from the response queue
         response = response_queue.get(timeout=30)
         return jsonify(response)  # Return both text and audio URL
     except Exception as e:

@@ -131,15 +131,46 @@ document.addEventListener('DOMContentLoaded', () => {
             
             input.addEventListener('keydown', (event) => {
                 if (event.key === 'Enter') {
-                    ipcRenderer.send('chat', inputbox.value, '2rkbtvJYU45f6nVcrlfPlPpMDKXeRbusqadaYwCCA8w', '90bd3386-10b3-4ac6-baa4-fc2ecfbdd702');
-                    console.log(inputbox.value)
-                    input.style.visibility = 'hidden';
-                    
-                    speechbubble.style.visibility = 'visible';
-                    pet.src = 'assets/dog/interogative.gif';
-                    
-                    // Stop cycling when a chat is initiated
-                    stopCyclingInterval();
+                    if (inputbox.value.includes('remind') || inputbox.value.includes('Remind')) {
+                        ipcRenderer.send('get-time-and-reason-for-reminder', inputbox.value);
+                        pet.src = 'assets/dog/interogative.gif';
+                        input.style.visibility = 'hidden';
+                        
+                        ipcRenderer.on('time-and-reason-for-reminder', (event, { isReminder, time, reason }) => {
+                            if (isReminder) {
+                                pet.src = 'assets/dog/ball.gif';
+                                ipcRenderer.send('set-time-and-reason', { isReminder, time, reason });
+                                ipcRenderer.send('console-log', `set-time-and-reason sent with: ${JSON.stringify({ isReminder, time, reason })}`);
+                                input.style.visibility = 'visible';
+                                inputbox.value = '';
+                                caption.textContent = `Sure! I'll remind you to "${reason}" in ${time}.`;
+                                
+                                ipcRenderer.removeListener('time-and-reason-for-reminder');
+                                return; // Exit early if it is a reminder
+                            }
+                        
+            
+                            // If it's not a reminder, run the rest of the code
+                            ipcRenderer.send('chat', inputbox.value, '2rkbtvJYU45f6nVcrlfPlPpMDKXeRbusqadaYwCCA8w', '90bd3386-10b3-4ac6-baa4-fc2ecfbdd702');
+                            console.log(inputbox.value);
+                            input.style.visibility = 'hidden';
+                            speechbubble.style.visibility = 'visible';
+                            pet.src = 'assets/dog/interogative.gif';
+            
+                            // Stop cycling when a chat is initiated
+                            stopCyclingInterval();
+                        });
+                    } else {
+                        // If the input doesn't include "remind", run the original chat behavior
+                        ipcRenderer.send('chat', inputbox.value, '2rkbtvJYU45f6nVcrlfPlPpMDKXeRbusqadaYwCCA8w', '90bd3386-10b3-4ac6-baa4-fc2ecfbdd702');
+                        console.log(inputbox.value);
+                        input.style.visibility = 'hidden';
+                        speechbubble.style.visibility = 'visible';
+                        pet.src = 'assets/dog/interogative.gif';
+            
+                        // Stop cycling when a chat is initiated
+                        stopCyclingInterval();
+                    }
                 }
             });
 

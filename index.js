@@ -49,6 +49,42 @@ function mainPet() {
     mainWindow.setIgnoreMouseEvents(true, { forward: true });
   });
 
+  ipcMain.on('console-log', (event, message) => {
+    console.log(message);
+  });
+  
+
+  ipcMain.on('get-time-and-reason-for-reminder', (event, inputValue) => {
+    const url = 'https://magicloops.dev/api/loop/3c18e07e-01f5-424b-ac36-b5cfb091b647/run';
+
+    fetch(url, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ command: inputValue }), // Pass inputValue as the command
+    })
+    .then((response) => {
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return response.json();
+    })
+    .then((responseJson) => {
+        console.log(responseJson);
+        const { isReminder, time, reason } = responseJson; // Destructure response
+        event.reply('time-and-reason-for-reminder', { isReminder, time, reason });
+    })
+    .catch((error) => {
+        console.error('Error fetching the reminder:', error);
+        event.reply('time-and-reason-for-reminder', { error: error.message });
+    });
+  });
+
+  ipcMain.on('set-time-and-reason', (event, { isReminder, time, reason }) => {
+    event.reply('set-time-and-reason', { isReminder, time, reason });
+  });
+
   ipcMain.on('chat', async (event, message, char, chat) => {
     try {
         const response = await axios.post('http://localhost:5000/api/data', {

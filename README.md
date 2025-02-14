@@ -37,3 +37,10 @@ x9o - everything
 
 
 debianlam - nothing
+
+
+# links
+
+siri api
+
+https://magicloops.dev/api/loop/f55c214b-e2c7-40fb-882c-fac1f6d0c7f2/run?command=remind+me+in+5+minutes+for+my+dog+walking

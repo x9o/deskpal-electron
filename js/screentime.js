@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const { ipcRenderer } = require('electron');
+    const { ipcRenderer, remote } = require('electron');
     const caption = document.getElementById('caption');
     const pet = document.getElementById('pet');
     const settings = require('./settings.json');
@@ -22,25 +22,41 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function showReminder(title, timeElapsed) {
-        ipcRenderer.send('chat', `You are a reminder for a computer user. Say this to them: "Hey! You've been using ${title} for ${timeElapsed} seconds! Take a break if you need to!"`, "YntB_ZeqRq2l_aVf2gWDCZl4oBttQzDvhj9cXafWcF8", "tVwsV_Ih3kZzC9oDGUxm4QXtCG5MvhyG0k1l9ybfPRw")
-        
-        ipcRenderer.removeAllListeners('chat-reply');
-        
-        ipcRenderer.on('chat-reply', (event, { replyMessage, audioUrl }) => {;
-            caption.innerHTML = `Hey! You've been using <span style="color: green;">${title}</span> for <span style="color: blue;">${timeElapsed}</span>!<br>` +
-                            `Take a break if you need to!`;
-            pet.src = 'assets/dog/anger.gif';
-            currentAudio = new Audio(audioUrl);
-            currentAudio.play();
-        });
-        
-        // const audio = new Audio('assets/alert.mp3');
-        // audio.play();
+        // Send reminder message to the Flask API for chat
+        ipcRenderer.send(
+            'chat', 
+            `Say this line: "Hey! You've been using ${title} for ${timeElapsed} seconds! Take a break if you need to!"`, 
+            "YntB_ZeqRq2l_aVf2gWDCZl4oBttQzDvhj9cXafWcF8", 
+            "tVwsV_Ih3kZzC9oDGUxm4QXtCG5MvhyG0k1l9ybfPRw"
+        );
 
-        // caption.style.backgroundColor  = 'rgb(219, 77, 77)';
-        setTimeout(() => {
-            caption.style.backgroundColor = 'white';
-        }, 1000)
+        // Listen for reply from chat API
+        ipcRenderer.removeAllListeners('chat-reply');
+        ipcRenderer.on('chat-reply', (event, { replyMessage, audioUrl }) => {
+            caption.innerHTML = `Hey! You've been using <span style="color: green;">${title}</span> for <span style="color: blue;">${timeElapsed}</span>!<br>` +
+                                `Take a break if you need to!`;
+            pet.src = 'assets/dog/anger.gif';
+            const currentAudio = new Audio(audioUrl);
+            currentAudio.play();
+
+            if (Notification.permission === "granted") {
+                new Notification(`Break Reminder`, {
+                    body: `You've been using ${title} for ${timeElapsed}. Take a break if you need to!`,
+                    icon: 'assets/icon.ico' // Optional: Path to your icon
+                });
+            } else if (Notification.permission !== "denied") {
+                Notification.requestPermission().then(permission => {
+                    if (permission === "granted") {
+                        new Notification(`Break Reminder`, {
+                            body: `You've been using ${title} for ${timeElapsed}. Take a break if you need to!`,
+                            icon: 'assets/icon.ico'
+                        });
+                    }
+                });
+            }
+        });
+
+        // Trigger a desktop notification
         
     }
 

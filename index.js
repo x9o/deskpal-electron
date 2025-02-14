@@ -1,4 +1,4 @@
-const { app, BrowserWindow, Tray, Menu, ipcMain, screen } = require('electron');
+const { app, BrowserWindow, Tray, Menu, ipcMain, screen, Notification } = require('electron');
 const path = require('path');
 const activeWin = require('active-win');
 const axios = require('axios');
@@ -6,6 +6,7 @@ const axios = require('axios');
 let tray = null;
 let controlPanelWindow = null;
 let mainWindow = null;
+
 
 function mainPet() {
   let { width, height } = screen.getPrimaryDisplay().workAreaSize;
@@ -27,6 +28,8 @@ function mainPet() {
   });
 
   mainWindow.loadFile('pet.html');
+
+  
 
   mainWindow.setIgnoreMouseEvents(true, { forward: true });
 
@@ -101,6 +104,11 @@ function ControlPanel() {
 
 
 app.whenReady().then(() => {
+
+
+  app.setAppUserModelId('DeskPal');
+
+
   mainPet();
 
 

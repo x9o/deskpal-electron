@@ -1,5 +1,5 @@
 {
-  "name": "desktoppet---electron",
+  "name": "deskpal",
   "version": "1.0.0",
   "build": {
     "appId": "com.deskpal.me",

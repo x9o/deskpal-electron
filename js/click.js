@@ -113,7 +113,7 @@ document.addEventListener('DOMContentLoaded', () => {
             } while (animation === lastAnimation); // Ensure the animation is not the same as the last one
             pet.src = animation;
             lastAnimation = animation;
-        }, 20000); // Cycle every 20 seconds
+        }, 30000); // Cycle every 20 seconds
     }
 
     function stopCyclingInterval() {

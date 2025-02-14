@@ -19,7 +19,6 @@ Days left: *15*
 - [ ] Find/Create better assets
 - [ ] Safety features❓
 - [ ] Think of new features
-- [ ] Advanced animations (different idle animations, day-night cycle)❓
 - [ ] Algorithm❓
 
 # notes

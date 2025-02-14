@@ -1,6 +1,6 @@
 # todolist
 
-Days left: *15*
+Days left: *14*
 
 
 

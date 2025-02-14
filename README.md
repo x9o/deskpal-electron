@@ -16,6 +16,7 @@ Days left: *15*
 - [ ] Find/Create better assets
 - [ ] Better prompts (i.e In this past week, you've used ... for ..., be wary of screentime)
 - [ ] Basic algorithim and computer usage anaylsis
+- [ ] 3 minute video
     - [ ] Think of new features
     - [ ] Safety features❓
     - [ ] Dashboard

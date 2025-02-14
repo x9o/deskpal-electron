@@ -1,6 +1,6 @@
 # todolist
 
-Days left: *14*
+Days left: *14*    crap we gotta hurry I will do it after the career thing  - debianlam
 
 
 
@@ -20,7 +20,11 @@ Days left: *14*
     - [ ] Think of new features
     - [ ] Safety features❓
     - [ ] Dashboard
+    - [x] debianlam on top
     - [ ] Better movement and accessibility
+    - [x] Sophie Lou wtf how did she get 1st place
+    - [x] How did SPCC win last year like wtf that ain't even pro
+    - [x] rigged ahh contest
 
 # notes
 
@@ -33,10 +37,10 @@ We gonna beat Microsoft with this one :fire: :fire: Linux is king!!! Deskpal wil
 
 # contrivutors
 
-x9o - everything
+x9o - ~~everything~~   gpt user lol get wrecked
 
 
-debianlam - nothing
+debianlam - ~~nothing~~   I did front end
 
 
 # links

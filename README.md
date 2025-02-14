@@ -29,3 +29,8 @@ Edit by H: Dude really treats this seriously :skull:
 Bro thinks we are working in Microsoft :skull:
 
 We gonna beat Microsoft with this one :fire: :fire: Linux is king!!! Deskpal will be the next best AI!!! :fire: Down with OpenAI and Deepseek :fire: Deskpal no monetization!!!!!! Deskpal + BlueLinux = Microsoft ender!!! :fire:
+
+# contrivutors
+
+x9o - everything
+debianlam - nothing

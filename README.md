@@ -33,4 +33,6 @@ We gonna beat Microsoft with this one :fire: :fire: Linux is king!!! Deskpal wil
 # contrivutors
 
 x9o - everything
+
+
 debianlam - nothing

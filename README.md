@@ -9,7 +9,7 @@ Days left: *14*
 - [x] AI chat
 - [x] Voice (c.ai built-in VC)
 - [x] Screen time reminders
-- [ ] Integrate AI chat, like Siri i.e., "remind me in 5 mins for my ...."
+- [x] Integrate AI chat, like Siri i.e., "remind me in 5 mins for my ...."
 - [x] Suitable AI (c.ai)
 - [ ] Computer vision mood tracking (gives encouragment promots when detected negative sentiment)
 - [ ] Pupil detection (enable saturation when detected tired pupils)

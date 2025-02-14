@@ -14,8 +14,8 @@ Days left: *14*
 - [ ] Computer vision mood tracking (gives encouragment promots when detected negative sentiment)
 - [ ] Pupil detection (enable saturation when detected tired pupils)
 - [ ] Find/Create better assets
-- [ ] Better prompts (i.e In this past week, you've used ... for ..., be wary of screentime)
-- [ ] Basic algorithim and computer usage anaylsis
+- [ ] Check if message is an accessibility command: Custom reminder, night mode, hide pet. Use magicloops to check whether message is one
+- [ ] Basic algorithim and computer usage anaylsis  (i.e In this past week, you've used ... for ..., be wary of screentime)
 - [ ] 3 minute video
     - [ ] Think of new features
     - [ ] Safety features❓

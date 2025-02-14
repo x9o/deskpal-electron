@@ -38,11 +38,11 @@ document.addEventListener('DOMContentLoaded', () => {
         const unit = timeParts[1].toLowerCase();
     
         let seconds = 0;
-        if (unit.includes('second') || unit === 'sec') {
+        if (unit.includes('second') || unit === 'sec' || unit === 'secs') {
             seconds = value;
-        } else if (unit.includes('minute') || unit === 'min') {
+        } else if (unit.includes('minute') || unit === 'min' || unit === 'mins') {
             seconds = value * 60;
-        } else if (unit.includes('hour') || unit === 'hr') {
+        } else if (unit.includes('hour') || unit === 'hr' || unit === 'hrs') {
             seconds = value * 3600;
         }
     

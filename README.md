@@ -14,7 +14,7 @@ Days left: *15*
 - [ ] Computer vision mood tracking
 - [ ] Pupil detection (enable saturation)
 - [ ] Dashboard
-- [ ] Better prompts
+- [ ] Better prompts (i.e In this past week, you've used ... for ..., be wary of screentime)
 - [ ] Better movement and accessibility
 - [ ] Find/Create better assets
 - [ ] Safety features❓

@@ -9,10 +9,10 @@ Days left: *15*
 - [x] AI chat
 - [x] AI voice (c.ai built-in VC)
 - [x] Screen time reminders for entertainment
-- [ ] Calendar reminders❓ (Can integrate AI chat, like Siri i.e., "remind me in 5 mins")
+- [ ] Calendar reminders❓ (Can integrate AI chat, like Siri i.e., "remind me in 5 mins for my ....")
 - [x] Find suitable AI (c.ai)
-- [ ] Computer vision mood tracking
-- [ ] Pupil detection (enable saturation)
+- [ ] Computer vision mood tracking (gives encouragment promots when detected negative sentiment)
+- [ ] Pupil detection (enable saturation when detected tired pupils)
 - [ ] Dashboard
 - [ ] Better prompts (i.e In this past week, you've used ... for ..., be wary of screentime)
 - [ ] Better movement and accessibility

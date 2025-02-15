@@ -11,7 +11,7 @@ Days left: *13*    crap we gotta hurry I will do it after the career thing  - de
 - [x] Screen time reminders
 - [x] Integrate AI chat, like Siri i.e., "remind me in 5 mins for my ...."
 - [x] Suitable AI (c.ai)
-- [ ] Computer vision mood tracking (gives encouragment promots when detected negative sentiment)
+- [x] Computer vision mood tracking (gives encouragment promots when detected negative sentiment)
 - [ ] Pupil detection (enable saturation when detected tired pupils)
 - [ ] Find/Create better assets
 - [ ] Use magicloops api check for accessibility features for every message

@@ -1,13 +1,24 @@
 from flask import Flask, jsonify, request
 from flask_cors import CORS
+from deepface import DeepFace
+import cv2
 from characterai import aiocai
-import json, asyncio, threading, requests
+import json
+import asyncio
+import threading
+import requests
 from queue import Queue
-from concurrent.futures import ThreadPoolExecutor
 
+
+# Initialize Flask app
 app = Flask(__name__)
 CORS(app)
 
+# Global variables for emotion detection
+
+
+
+# Global variables for chat functionality
 config = json.load(open('settings_python.json'))
 client = aiocai.Client(config['cai-token'])
 voiceid = config['voice-id']
@@ -18,6 +29,34 @@ message_queue = Queue()
 response_queue = Queue()
 processing = threading.Event()
 
+# Emotion Detection Function (Single Analysis)
+def analyze_emotion():
+    # Capture a single frame from the webcam
+    cap = cv2.VideoCapture(0)
+    ret, frame = cap.read()
+    cap.release()
+
+    if not ret:
+        return None
+
+    # Analyze emotions in the frame
+    try:
+        result = DeepFace.analyze(frame, actions=['emotion'], enforce_detection=True)
+        dominant_emotion = result[0]['dominant_emotion']
+        return dominant_emotion
+    except Exception as e:
+        return None
+
+# Emotion Detection API Endpoint
+@app.route('/detect_emotion', methods=['GET'])
+def detect_emotion_api():
+    emotion = analyze_emotion()
+    if emotion:
+        return jsonify({"emotion": emotion})
+    else:
+        return jsonify({"emotion": None})
+
+# Chat Functionality
 async def maintain_chat_connection():
     global chat_connection
     while True:
@@ -67,6 +106,7 @@ async def maintain_chat_connection():
             processing.clear()
             await asyncio.sleep(1)
 
+# Chat API Endpoint
 @app.route('/api/data', methods=['POST'])
 def getmessage():
     data = request.get_json()
@@ -90,6 +130,7 @@ def getmessage():
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
+# Run the chat connection loop in a separate thread
 def run_async_loop():
     loop = asyncio.new_event_loop()
     asyncio.set_event_loop(loop)
@@ -98,5 +139,6 @@ def run_async_loop():
 chat_thread = threading.Thread(target=run_async_loop, daemon=True)
 chat_thread.start()
 
+# Start the Flask app
 if __name__ == '__main__':
     app.run(port=5000)

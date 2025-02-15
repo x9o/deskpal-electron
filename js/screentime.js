@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const windowTimes = {};
     const reminderThreshold = [1800, 3600, 7200]; 
+    const nolti = new Audio("assets/noti.mp3");
 
     function formatTime(seconds) {
         if (seconds === 0) {
@@ -52,9 +53,9 @@ document.addEventListener('DOMContentLoaded', () => {
         // Send reminder message to the Flask API for chat
         ipcRenderer.send(
             'chat', 
-            `Say this line: "Hey! You've been using ${title} for ${timeElapsed} seconds! Take a break if you need to!"`, 
-            "YntB_ZeqRq2l_aVf2gWDCZl4oBttQzDvhj9cXafWcF8", 
-            "tVwsV_Ih3kZzC9oDGUxm4QXtCG5MvhyG0k1l9ybfPRw"
+            `Hey! You've been using ${title} for ${timeElapsed} seconds! Take a break if you need to!`, 
+            "mU5dpDywZpb_2Uoe3zUvj4BunJu2nxZqU53Kav0OdSc", 
+            "13fb2e9e-8328-4e26-b41a-fdcfa8e096d6"
         );
 
         // Listen for reply from chat API
@@ -129,6 +130,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    ipcRenderer.removeAllListeners('set-time-and-reason');
     ipcRenderer.on('set-time-and-reason', (event, { isReminder, time, reason }) => {
         ipcRenderer.send('console-log', `set-time-and-reason received with: ${JSON.stringify({ isReminder, time, reason })}`);
 
@@ -140,24 +142,48 @@ document.addEventListener('DOMContentLoaded', () => {
         ipcRenderer.send('console-log', `seconds parsed: ${seconds}`);
     
         // const formattedTime = formatTime(seconds); // Format 600 seconds into "10m"
-
-    
+        
+        
+        
         setTimeout(() => {
-            if (Notification.permission === "granted") {
-                new Notification(`Custom Reminder`, {
-                    body: `Reminder: ${reason}`,
-                    icon: 'assets/icon.ico'
-                });
-            } else if (Notification.permission !== "denied") {
-                Notification.requestPermission().then(permission => {
-                    if (permission === "granted") {
-                        new Notification(`Break Reminder`, {
-                            body: `Reminder: ${reason}`,
-                            icon: 'assets/icon.ico'
-                        });
-                    }
-                });
-            }
+            ipcRenderer.send(
+                'chat', 
+                `Custom reminder: ${reason}`, 
+                "mU5dpDywZpb_2Uoe3zUvj4BunJu2nxZqU53Kav0OdSc", 
+                "13fb2e9e-8328-4e26-b41a-fdcfa8e096d6"
+            );
+    
+            // Listen for reply from chat API
+            ipcRenderer.removeAllListeners('chat-reply');
+            ipcRenderer.on('chat-reply', (event, { replyMessage, audioUrl }) => {
+                // setInterval(() => {
+                //     nolti.play();
+                // }, 500);
+                caption.textContent = "Custom reminder: " + reason;
+
+                const currentAudio = new Audio(audioUrl);
+                currentAudio.play();
+
+                if (Notification.permission === "granted") {
+                    new Notification(`Custom Reminder`, {
+                        body: `Reminder: ${reason}`,
+                        icon: 'assets/icon.ico'
+                    });
+                } else if (Notification.permission !== "denied") {
+                    Notification.requestPermission().then(permission => {
+                        if (permission === "granted") {
+                            new Notification(`Break Reminder`, {
+                                body: `Reminder: ${reason}`,
+                                icon: 'assets/icon.ico'
+                            });
+                        }
+                    });
+                }
+            
+            });
+
+
+            
         }, seconds * 1000); // Schedule the reminder after 600,000 milliseconds (10 minutes)
     });
 });

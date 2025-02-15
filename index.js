@@ -135,7 +135,56 @@ function ControlPanel() {
 }
 
 
+let emotionHistory = []; // Stores the last 4 detected emotions
 
+async function checkUserEmotion() {
+    try {
+        const response = await axios.get('http://127.0.0.1:5000/detect_emotion');
+        const emotion = response.data.emotion;
+
+        if (emotion) {
+            console.log(`Detected Emotion: ${emotion}`);
+
+            // Map "fear", "sad", and "angry" to a single category ("negative")
+            const mappedEmotion = (emotion === 'fear' || emotion === 'sad' || emotion === 'angry') ? 'negative' : emotion;
+
+            // Add the mapped emotion to the history
+            emotionHistory.push(mappedEmotion);
+
+            // Keep only the last 4 emotions
+            if (emotionHistory.length > 4) {
+                emotionHistory.shift(); // Remove the oldest emotion
+            }
+
+            // Check for consistency in the last 4 emotions
+            if (emotionHistory.length === 4 && emotionHistory.every(e => e === emotionHistory[0])) {
+                console.log(`Consistent Emotion Detected: ${emotionHistory[0]}`);
+                // Trigger pet's behavior based on the consistent emotion
+                encourageUser(emotionHistory[0]);
+
+                // Reset the emotion history after triggering the event
+                emotionHistory = [];
+            }
+        }
+    } catch (error) {
+        console.error('Error detecting emotion:', error);
+    }
+}
+
+// Function to encourage the user based on detected emotion
+function encourageUser(emotion) {
+    // Add logic to make the pet encourage the user based on the emotion
+    console.log(`Pet is responding to emotion: ${emotion}`);
+    // Example: Display a message, play a sound, or animate the pet
+    if (mainWindow) {
+        mainWindow.webContents.send('emotion-detected', emotion);
+    }
+}
+
+// Start checking for emotions periodically
+function startEmotionDetection() {
+    setInterval(checkUserEmotion, 3000); // Check every 3 seconds
+}
 
 
 
@@ -157,6 +206,7 @@ app.whenReady().then(() => {
 
   tray.setToolTip('Deskpal');
   tray.setContextMenu(contextMenu);
+  startEmotionDetection();
 
   app.on('activate', () => {
     if (BrowserWindow.getAllWindows().length === 0) mainPet();

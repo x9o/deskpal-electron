@@ -1,6 +1,6 @@
 # todolist
 
-Days left: *14*    crap we gotta hurry I will do it after the career thing  - debianlam
+Days left: *13*    crap we gotta hurry I will do it after the career thing  - debianlam
 
 
 
@@ -15,6 +15,7 @@ Days left: *14*    crap we gotta hurry I will do it after the career thing  - de
 - [ ] Pupil detection (enable saturation when detected tired pupils)
 - [ ] Find/Create better assets
 - [ ] Use magicloops api check for accessibility features for every message
+- [ ] Make sure that cycling random prompt does not interfere with other text changes (Use sideEffects from react)
 - [ ] Basic algorithim and computer usage anaylsis  (i.e In this past week, you've used ... for ..., be wary of screentime)
 - [ ] 3 minute video
     - [ ] Think of new features

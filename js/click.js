@@ -70,7 +70,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const { ipcRenderer } = require('electron');
 
     const idleAnimations = ['assets/dog/ball.gif', 'assets/dog/anger.gif', 'assets/dog/wink.gif', 'assets/dog/bored.gif', 'assets/dog/whatsup.gif', 'assets/dog/up-balloon.gif'];
-
+    const nolti = new Audio("assets/noti.mp3");
     function getRandomIdleAnimation() {
         const randomIndex = Math.floor(Math.random() * idleAnimations.length);
         return idleAnimations[randomIndex];
@@ -190,6 +190,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 // Stop cycling when a chat reply is received
                 stopCyclingInterval();
+                // setInterval(() => {
+                //     nolti.play();
+                // }, 500)
 
                 if (audioUrl) {
                     // If there is already an audio playing, pause it

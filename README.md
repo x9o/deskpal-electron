@@ -14,7 +14,7 @@ Days left: *14*    crap we gotta hurry I will do it after the career thing  - de
 - [ ] Computer vision mood tracking (gives encouragment promots when detected negative sentiment)
 - [ ] Pupil detection (enable saturation when detected tired pupils)
 - [ ] Find/Create better assets
-- [ ] Check if message is an accessibility command: Custom reminder, night mode, hide pet. Use magicloops to check whether message is one
+- [ ] Use magicloops api check for accessibility features for every message
 - [ ] Basic algorithim and computer usage anaylsis  (i.e In this past week, you've used ... for ..., be wary of screentime)
 - [ ] 3 minute video
     - [ ] Think of new features
@@ -22,6 +22,9 @@ Days left: *14*    crap we gotta hurry I will do it after the career thing  - de
     - [ ] Dashboard
     - [x] debianlam on top
     - [ ] Better movement and accessibility
+     
+
+
     - [x] Sophie Lou wtf how did she get 1st place
     - [x] How did SPCC win last year like wtf that ain't even pro
     - [x] rigged ahh contest

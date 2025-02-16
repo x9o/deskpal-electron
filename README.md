@@ -39,6 +39,10 @@ Bro thinks we are working in Microsoft :skull:
 
 We gonna beat Microsoft with this one :fire: :fire: Linux is king!!! Deskpal will be the next best AI!!! :fire: Down with OpenAI and Deepseek :fire: Deskpal no monetization!!!!!! Deskpal + BlueLinux = Microsoft ender!!! :fire:
 
+
+
+EDIT: CHROMIUM SUCKS, FIREFOX IS KING :fire:
+
 # contrivutors
 
 x9o - ~~everything~~   gpt user lol get wrecked

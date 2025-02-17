@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
     petContainer.addEventListener('mousedown', (event) => {
         ensureInitialPosition(); // Set initial position if not already set
         isDragging = true;
-        pet.src = 'assets/dog/cold.gif';
+        pet.src = 'assets/nigga_in_red/run.gif';
 
         // Record the starting mouse position
         startX = event.clientX;
@@ -60,7 +60,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.addEventListener('mouseup', () => {
         if (isDragging) {
             isDragging = false; // Stop dragging
-            pet.src = 'assets/dog/bored.gif';
+            pet.src = 'assets/nigga_in_red/idle.gif';
             petContainer.style.cursor = 'grab'; // Reset cursor
         }
     });

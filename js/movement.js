@@ -13,7 +13,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // const movementmode = 'random';
 
     // Array of idle animations
-    const idleAnimations = ['assets/dog/ball.gif', 'assets/dog/cold.gif', 'assets/dog/wink.gif', 'assets/dog/bored.gif'];
+    // const idleAnimations = ['assets/dog/ball.gif', 'assets/dog/cold.gif', 'assets/dog/wink.gif', 'assets/dog/bored.gif'];
+    const idleAnimations = ['assets/nigga_in_red/jump.gif', 'assets/nigga_in_red/idle.gif'];
 
     function getRandomIdleAnimation() {
         const randomIndex = Math.floor(Math.random() * idleAnimations.length);
@@ -35,7 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (isMovingNow !== isMoving) {
             isMoving = isMovingNow;
-            petImage.src = isMoving ? 'assets/dog/bored.gif' : getRandomIdleAnimation(); // Use random idle animation
+            petImage.src = isMoving ? 'assets/nigga_in_red/run.gif' : getRandomIdleAnimation(); // Use random idle animation
         }
 
         petContainer.style.transform = `translate(${currentPosX}px, ${currentPosY}px)`;
@@ -90,7 +91,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             isWalking = true;
             isMoving = true;
-            petImage.src = 'assets/dog/bored.gif';
+            petImage.src = 'assets/nigga_in_red/run.gif';
 
             const walkDuration = 2000 + Math.random() * 2000; // Random walk duration
             setTimeout(() => {

@@ -36,7 +36,7 @@ const happyMessages = [
     "You seem happy! Let’s celebrate this good mood!",
     "You seem happy! You’re glowing with joy today!",
     "You seem happy! Keep up the great vibes!",
-    "You seem happy! You’re unstoppable when you’re happy!",
+    "You seem happy! You’re unstoppable when you’re happy!",        
     "You seem happy! Your happiness is inspiring!",
     "You seem happy! What a wonderful day to be happy!",
     "You seem happy! You’re doing amazing! Keep it up!",

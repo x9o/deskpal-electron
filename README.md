@@ -15,9 +15,10 @@ Days left: *11*    crap we gotta hurry I will do it after the career thing  - de
 - [ ] ‼️ Pupil detection (enable saturation when detected tired pupils. Yes/No prompt to enable night mode grt from shadcn or MUI)
 - [ ] ‼️ Use magicloops api check for accessibility features for every message i.e. dark mode, hide pet, reminder
 - [ ] ‼️ Dashboard for screen time reminder configuration
-- [ ] Make sure that cycling random prompt does not interfere with other text changes (Use sideEffects from react)
-- [ ] Basic algorithim and computer usage anaylsis  (train face data for mood detection, screentime analysis)
-- [ ] Find/Create better assets
+- [ ] Fix duplicate callback bugs
+    - [ ] Make sure that cycling random prompt does not interfere with other text changes (Use sideEffects from react)
+    - [ ] Basic algorithim and computer usage anaylsis  (train face data for mood detection, screentime analysis)
+- [x] Find/Create better assets
 - [ ] ‼️ Proposal
 - [ ] ‼️ 3 minute video
     - [ ] Think of new features

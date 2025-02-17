@@ -63,7 +63,7 @@ document.addEventListener('DOMContentLoaded', () => {
         ipcRenderer.on('chat-reply', (event, { replyMessage, audioUrl }) => {
             caption.innerHTML = `Hey! You've been using <span style="color: green;">${title}</span> for <span style="color: blue;">${timeElapsed}</span>!<br>` +
                                 `Take a break if you need to!`;
-            pet.src = 'assets/dog/anger.gif';
+            // pet.src = 'assets/dog/anger.gif';
             const currentAudio = new Audio(audioUrl);
             currentAudio.play();
 
@@ -130,8 +130,8 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    ipcRenderer.removeAllListeners('set-time-and-reason');
-    ipcRenderer.on('set-time-and-reason', (event, { isReminder, time, reason }) => {
+    // ipcRenderer.removeAllListeners('set-time-and-reason');
+    ipcRenderer.once('set-time-and-reason', (event, { isReminder, time, reason }) => {
         ipcRenderer.send('console-log', `set-time-and-reason received with: ${JSON.stringify({ isReminder, time, reason })}`);
 
         
@@ -155,7 +155,7 @@ document.addEventListener('DOMContentLoaded', () => {
     
             // Listen for reply from chat API
             ipcRenderer.removeAllListeners('chat-reply');
-            ipcRenderer.on('chat-reply', (event, { replyMessage, audioUrl }) => {
+            ipcRenderer.once('chat-reply', (event, { replyMessage, audioUrl }) => {
                 // setInterval(() => {
                 //     nolti.play();
                 // }, 500);

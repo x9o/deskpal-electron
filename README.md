@@ -12,8 +12,8 @@ Days left: *11*    crap we gotta hurry I will do it after the career thing  - de
 - [x] Integrate AI chat, like Siri i.e., "remind me in 5 mins for my ...."
 - [x] Suitable AI (c.ai)
 - [x] Computer vision mood tracking (gives encouragment promots when detected negative sentiment)
-- [ ] Pupil detection (enable saturation when detected tired pupils. Yes/No prompt to enable night mode)
-- [ ] Use magicloops api check for accessibility features for every message
+- [ ] Pupil detection (enable saturation when detected tired pupils. Yes/No prompt to enable night mode grt from shadcn or MUI)
+- [ ] Use magicloops api check for accessibility features for every message i.e. dark mode, hide pet, reminder
 - [ ] Make sure that cycling random prompt does not interfere with other text changes (Use sideEffects from react)
 - [ ] Basic algorithim and computer usage anaylsis  (train face data for mood detection, screentime analysis)
 - [ ] Find/Create better assets

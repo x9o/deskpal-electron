@@ -63,6 +63,7 @@ document.addEventListener('DOMContentLoaded', () => {
         ipcRenderer.on('chat-reply', (event, { replyMessage, audioUrl }) => {
             caption.innerHTML = `Hey! You've been using <span style="color: green;">${title}</span> for <span style="color: blue;">${timeElapsed}</span>!<br>` +
                                 `Take a break if you need to!`;
+            ipcRenderer.send('stop-cycling-interval');
             // pet.src = 'assets/dog/anger.gif';
             const currentAudio = new Audio(audioUrl);
             currentAudio.play();
@@ -131,14 +132,14 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // ipcRenderer.removeAllListeners('set-time-and-reason');
-    ipcRenderer.once('set-time-and-reason', (event, { isReminder, time, reason }) => {
-        ipcRenderer.send('console-log', `set-time-and-reason received with: ${JSON.stringify({ isReminder, time, reason })}`);
+    ipcRenderer.once('set-time-and-reason', (event, { isReminder, isSleepy, reminderReason, timeSpecification }) => {
+        ipcRenderer.send('console-log', `set-time-and-reason received with: ${JSON.stringify({ isReminder, isSleepy, reminderReason, timeSpecification })}`);
 
         
         if (!isReminder) return;
         
-        ipcRenderer.send('console-log', `time: ${time}, reason: ${reason}`);
-        const seconds = parseTime(time); // Parse "10 minutes" into 600 seconds
+        ipcRenderer.send('console-log', `time: ${timeSpecification}, reason: ${reminderReason}`);
+        const seconds = parseTime(timeSpecification); // Parse "10 minutes" into 600 seconds
         ipcRenderer.send('console-log', `seconds parsed: ${seconds}`);
     
         // const formattedTime = formatTime(seconds); // Format 600 seconds into "10m"
@@ -148,7 +149,7 @@ document.addEventListener('DOMContentLoaded', () => {
         setTimeout(() => {
             ipcRenderer.send(
                 'chat', 
-                `Custom reminder: ${reason}`, 
+                `Custom reminder: ${reminderReason}`, 
                 "mU5dpDywZpb_2Uoe3zUvj4BunJu2nxZqU53Kav0OdSc", 
                 "13fb2e9e-8328-4e26-b41a-fdcfa8e096d6"
             );
@@ -159,21 +160,22 @@ document.addEventListener('DOMContentLoaded', () => {
                 // setInterval(() => {
                 //     nolti.play();
                 // }, 500);
-                caption.textContent = "Custom reminder: " + reason;
+                caption.textContent = "Custom reminder: " + reminderReason;
+                ipcRenderer.send('stop-cycling-interval');
 
                 const currentAudio = new Audio(audioUrl);
                 currentAudio.play();
 
                 if (Notification.permission === "granted") {
                     new Notification(`Custom Reminder`, {
-                        body: `Reminder: ${reason}`,
+                        body: `Reminder: ${reminderReason}`,
                         icon: 'assets/icon.ico'
                     });
                 } else if (Notification.permission !== "denied") {
                     Notification.requestPermission().then(permission => {
                         if (permission === "granted") {
                             new Notification(`Break Reminder`, {
-                                body: `Reminder: ${reason}`,
+                                body: `Reminder: ${reminderReason}`,
                                 icon: 'assets/icon.ico'
                             });
                         }

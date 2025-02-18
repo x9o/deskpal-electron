@@ -114,7 +114,7 @@ document.addEventListener('DOMContentLoaded', () => {
             } while (animation === lastAnimation); // Ensure the animation is not the same as the last one
             pet.src = animation;
             lastAnimation = animation;
-        }, 30000); // Cycle every 20 seconds
+        }, 20000); // Cycle every 20 seconds
     }
 
     function stopCyclingInterval() {
@@ -123,6 +123,13 @@ document.addEventListener('DOMContentLoaded', () => {
             cyclingInterval = null;
         }
     }
+
+    ipcRenderer.on('stop-cycling-interval', () => {
+        stopCyclingInterval();
+        setTimeout(() => {
+            startCyclingInterval();
+        }, 5000);
+    });
 
     startCyclingInterval();
 
@@ -134,7 +141,20 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (event.key === 'Enter') {
                     // if (inputbox.value.includes('remind') || inputbox.value.includes('Remind')) {
                     
-                    ipcRenderer.send('get-time-and-reason-for-reminder', inputbox.value);
+                    let debounceTimeout;
+
+                    function debouncedSendRequest() {
+                        if (debounceTimeout) {
+                            clearTimeout(debounceTimeout); // Clear the previous timeout
+                        }
+
+                        debounceTimeout = setTimeout(() => {
+                            ipcRenderer.send('get-time-and-reason-for-reminder', inputbox.value);
+                        }, 300); // Wait 300ms before sending the request
+                    }
+
+                    // Call debouncedSendRequest() when needed
+                    debouncedSendRequest();
                     speechbubble.style.visibility = 'visible';
                     // pet.src = 'assets/dog/interogative.gif';
                     input.style.visibility = 'hidden';
@@ -142,19 +162,24 @@ document.addEventListener('DOMContentLoaded', () => {
                     
                     
                     
-                    ipcRenderer.once('time-and-reason-for-reminder', (event, { isReminder, time, reason }) => {
+                    ipcRenderer.once('time-and-reason-for-reminder', (event, { isReminder, isSleepy, reminderReason, timeSpecification }) => {
                         if (isReminder) {
                             speechbubble.style.visibility = 'hidden';
                             // pet.src = 'assets/dog/ball.gif';
-                            ipcRenderer.send('set-time-and-reason', { isReminder, time, reason });
-                            ipcRenderer.send('console-log', `set-time-and-reason sent with: ${JSON.stringify({ isReminder, time, reason })}`);
+                            ipcRenderer.send('set-time-and-reason', { isReminder, isSleepy, reminderReason, timeSpecification });
+                            ipcRenderer.send('console-log', `set-time-and-reason sent with: ${JSON.stringify({ isReminder, isSleepy, reminderReason, timeSpecification })}`);
                             input.style.visibility = 'visible';
                             inputbox.value = '';
-                            caption.textContent = `Sure! I'll remind you to "${reason}" in ${time}.`;
+                            caption.textContent = `Sure! I'll remind you to "${reminderReason}" in ${timeSpecification}.`;
+                            ipcRenderer.send('stop-cycling-interval');
                             
                             ipcRenderer.removeListener('time-and-reason-for-reminder');
                             return; // Exit early if it is a reminder
                         }
+
+                        // if (isSleepy) {
+                            
+                        // }
                     
         
                         // If it's not a reminder, run the rest of the code

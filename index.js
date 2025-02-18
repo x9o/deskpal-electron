@@ -55,7 +55,10 @@ function mainPet() {
   
 
   ipcMain.on('get-time-and-reason-for-reminder', (event, inputValue) => {
-    const url = 'https://magicloops.dev/api/loop/3c18e07e-01f5-424b-ac36-b5cfb091b647/run';
+    // const url = 'https://magicloops.dev/api/loop/3c18e07e-01f5-424b-ac36-b5cfb091b647/run';
+    // { isReminder, time, reason }
+    const url = 'https://magicloops.dev/api/loop/282b664e-931c-4019-bdf8-0120ee87b615/run'
+    
 
     fetch(url, {
         method: 'POST',
@@ -72,8 +75,8 @@ function mainPet() {
     })
     .then((responseJson) => {
         console.log(responseJson);
-        const { isReminder, time, reason } = responseJson; // Destructure response
-        event.reply('time-and-reason-for-reminder', { isReminder, time, reason });
+        const { isReminder, isSleepy, reminderReason, timeSpecification } = responseJson; // Destructure response
+        event.reply('time-and-reason-for-reminder', { isReminder, isSleepy, reminderReason, timeSpecification });
     })
     .catch((error) => {
         console.error('Error fetching the reminder:', error);
@@ -81,9 +84,20 @@ function mainPet() {
     });
   });
 
-  ipcMain.on('set-time-and-reason', (event, { isReminder, time, reason }) => {
-    event.reply('set-time-and-reason', { isReminder, time, reason });
+
+
+  ipcMain.on('set-time-and-reason', (event, { isReminder, isSleepy, reminderReason, timeSpecification }) => {
+    event.reply('set-time-and-reason', { isReminder, isSleepy, reminderReason, timeSpecification });
   });
+
+
+
+  ipcMain.on('stop-cycling-interval', (event) => {
+    event.reply('stop-cycling-interval');
+  })
+
+
+
 
   ipcMain.on('chat', async (event, message, char, chat) => {
     try {
@@ -105,6 +119,22 @@ function mainPet() {
     } catch (error) {
         console.error('Error communicating with Flask API:', error);
     }
+  });
+
+
+  ipcMain.on('run-nightlight', (event) => {
+    const exePath = path.join(__dirname, 'nightlight.exe'); // Path to the .exe file
+    const child = spawn(exePath, [], { detached: true, stdio: 'ignore' }); // Run the .exe file
+
+    child.on('error', (error) => {
+      console.error('Error running nightlight.exe:', error);
+      event.reply('run-nightlight-error', error.message);
+    });
+
+    child.on('close', (code) => {
+      console.log(`nightlight.exe exited with code ${code}`);
+      event.reply('run-nightlight-success', `nightlight.exe ran successfully with exit code ${code}`);
+    });
   });
 
 
@@ -152,12 +182,12 @@ async function checkUserEmotion() {
             emotionHistory.push(mappedEmotion);
 
             // Keep only the last 4 emotions
-            if (emotionHistory.length > 4) {
+            if (emotionHistory.length > 6) {
                 emotionHistory.shift(); // Remove the oldest emotion
             }
 
             // Check for consistency in the last 4 emotions
-            if (emotionHistory.length === 4 && emotionHistory.every(e => e === emotionHistory[0])) {
+            if (emotionHistory.length === 6 && emotionHistory.every(e => e === emotionHistory[0])) {
                 console.log(`Consistent Emotion Detected: ${emotionHistory[0]}`);
                 // Trigger pet's behavior based on the consistent emotion
                 encourageUser(emotionHistory[0]);

@@ -78,6 +78,7 @@ ipcRenderer.on('emotion-detected', (event, emotion) => {
             const currentAudio = new Audio(audioUrl);
             currentAudio.play();
             caption.textContent = message;
+            ipcRenderer.send('stop-cycling-interval');
         });
     } else if (emotion === 'happy') {
         // Display a random happy message
@@ -98,6 +99,7 @@ ipcRenderer.on('emotion-detected', (event, emotion) => {
             const currentAudio = new Audio(audioUrl);
             currentAudio.play();
             caption.textContent = message;
+            ipcRenderer.send('stop-cycling-interval');
         });
     }
 });

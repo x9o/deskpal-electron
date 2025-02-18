@@ -13,8 +13,8 @@ Days left: *11*    crap we gotta hurry I will do it after the career thing  - de
 - [x] Suitable AI (c.ai)
 - [x] Computer vision mood tracking (gives encouragment promots when detected negative sentiment)
 - [ ] ‼️ Pupil detection (enable saturation when detected tired pupils. Yes/No prompt to enable night mode grt from shadcn or MUI)
-- [ ] ‼️ Use magicloops api check for accessibility features for every message i.e. dark mode, hide pet, reminder
-- [ ] ‼️ Dashboard fqor screen time reminder configuration
+- [x] ‼️ Use magicloops api check for accessibility features for every message i.e. dark mode, hide pet, reminder
+- [x] ‼️ Dashboard fqor screen time reminder configuration
 - [ ] Fix duplicate callback bugs
     - [ ] Make sure that cycling random prompt does not interfere with other text changes (Use sideEffects from react)
     - [ ] Basic algorithim and computer usage anaylsis  (train face data for mood detection, screentime analysis)

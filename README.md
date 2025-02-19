@@ -16,7 +16,7 @@ Days left: *11*    crap we gotta hurry I will do it after the career thing  - de
 - [ ] ❓ Pupil detection (enable night light when detected tired pupils. Yes/No prompt to enable)
 - [x] ‼️ Dashboard fqor screen time reminder configuration
 - [x] Fix duplicate callback bugs
-    - [x] Make sure that cycling random prompt does not interfere with other text changes (Use sideEffects from react)
+- [x] Make sure that cycling random prompt does not interfere with other text changes (Use sideEffects from react)
  - [ ] Basic algorithim and computer usage anaylsis  (train face data for mood detection, screentime analysis)
 - [x] Find/Create better assets
 - [ ] ‼️ Proposal

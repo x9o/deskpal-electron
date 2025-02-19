@@ -2,7 +2,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const petContainer = document.getElementById('pet-container');
     const images = petContainer.querySelectorAll('img'); // Get all images in the container
     const pet = document.getElementById('pet');
+    const settings = require('./settings.json');
 
+    if (settings['pet-movement-mode'] === 'cursor') {
+        return;
+    }
 
     let isDragging = false; // Track dragging state
     let startX, startY, initialX, initialY; // Store positions
@@ -27,7 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
     petContainer.addEventListener('mousedown', (event) => {
         ensureInitialPosition(); // Set initial position if not already set
         isDragging = true;
-        pet.src = 'assets/nigga_in_red/run.gif';
+        pet.src = 'assets/blobcat/random1.gif';
 
         // Record the starting mouse position
         startX = event.clientX;
@@ -60,7 +64,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.addEventListener('mouseup', () => {
         if (isDragging) {
             isDragging = false; // Stop dragging
-            pet.src = 'assets/nigga_in_red/idle.gif';
+            pet.src = `assets/blobcat/idle.gif?timestamp=${Date.now()}`;
             petContainer.style.cursor = 'grab'; // Reset cursor
         }
     });

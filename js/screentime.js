@@ -131,8 +131,8 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // ipcRenderer.removeAllListeners('set-time-and-reason');
-    ipcRenderer.once('set-time-and-reason', (event, { isReminder, isSleepy, reminderReason, timeSpecification }) => {
+    ipcRenderer.removeAllListeners('set-time-and-reason');
+    ipcRenderer.on('set-time-and-reason', (event, { isReminder, isSleepy, reminderReason, timeSpecification }) => {
         ipcRenderer.send('console-log', `set-time-and-reason received with: ${JSON.stringify({ isReminder, isSleepy, reminderReason, timeSpecification })}`);
 
         

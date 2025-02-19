@@ -2,6 +2,7 @@ const { app, BrowserWindow, Tray, Menu, ipcMain, screen, Notification } = requir
 const path = require('path');
 const activeWin = require('active-win');
 const axios = require('axios');
+const { spawn } = require('child_process');
 
 let tray = null;
 let controlPanelWindow = null;
@@ -74,7 +75,6 @@ function mainPet() {
         return response.json();
     })
     .then((responseJson) => {
-        console.log(responseJson);
         const { isReminder, isSleepy, reminderReason, timeSpecification } = responseJson; // Destructure response
         event.reply('time-and-reason-for-reminder', { isReminder, isSleepy, reminderReason, timeSpecification });
     })

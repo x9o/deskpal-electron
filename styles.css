@@ -38,8 +38,8 @@ html, body {
 
 
 #caption {
-  margin-top: 10px;
-  font-family: "Tiny5", sans-serif;
+  /* margin-top: 5px; */
+  font-family: "Catamaran", serif;
   color: black;
   font-size: 13px;
   background-color: white;
@@ -64,13 +64,14 @@ html, body {
 #input {
   pointer-events: auto; 
   cursor: pointer;
+  visibility: hidden;
 }
 
 
 #inputbox {
   padding: 5px;
   border-radius: 5px;
-  font-family: "Tiny5", sans-serif;
+  font-family: "Catamaran", serif;
   color: white;
   background-color: grey; 
 }

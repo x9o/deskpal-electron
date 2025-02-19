@@ -22,7 +22,14 @@ void SetNightLight(bool enable) {
 
 int main() {
     std::cout << "Enabling night light..." << std::endl;
-    SetNightLight(true);
+    SetNightLight(true);  // Enable night light
+
+    // Wait for 5 seconds (5000 milliseconds)
+    Sleep(5000);
+
+    std::cout << "Disabling night light..." << std::endl;
+    SetNightLight(false);  // Disable night light
+
     return 0;
 }
 

@@ -70,7 +70,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const { ipcRenderer } = require('electron');
 
     // const idleAnimations = ['assets/dog/ball.gif', 'assets/dog/anger.gif', 'assets/dog/wink.gif', 'assets/dog/bored.gif', 'assets/dog/whatsup.gif', 'assets/dog/up-balloon.gif'];
-    const idleAnimations = ['assets/nigga_in_red/jump.gif', 'assets/nigga_in_red/idle.gif'];
+    const idleAnimations = ['assets/blobcat/idle.gif', 'assets/blobcat/random1.gif', 'assets/blobcat/random2.gif'];
     const nolti = new Audio("assets/noti.mp3");
     function getRandomIdleAnimation() {
         const randomIndex = Math.floor(Math.random() * idleAnimations.length);
@@ -135,81 +135,80 @@ document.addEventListener('DOMContentLoaded', () => {
 
     pet.addEventListener('click', () => {
         if (settings['pet-click-action'] === 'chat') {
-            input.style.visibility = 'visible';   
+            if (input.style.visibility === 'hidden' || input.style.visibility === '') {
+                input.style.visibility = 'visible';
+            } else {
+                input.style.visibility = 'hidden';
+            }
+            
+            
+
             
             input.addEventListener('keydown', (event) => {
                 if (event.key === 'Enter') {
-                    // if (inputbox.value.includes('remind') || inputbox.value.includes('Remind')) {
-                    
-                    let debounceTimeout;
-
-                    function debouncedSendRequest() {
-                        if (debounceTimeout) {
-                            clearTimeout(debounceTimeout); // Clear the previous timeout
-                        }
-
-                        debounceTimeout = setTimeout(() => {
-                            ipcRenderer.send('get-time-and-reason-for-reminder', inputbox.value);
-                        }, 300); // Wait 300ms before sending the request
-                    }
-
-                    // Call debouncedSendRequest() when needed
-                    debouncedSendRequest();
                     speechbubble.style.visibility = 'visible';
-                    // pet.src = 'assets/dog/interogative.gif';
                     input.style.visibility = 'hidden';
-
-                    
-                    
-                    
-                    ipcRenderer.once('time-and-reason-for-reminder', (event, { isReminder, isSleepy, reminderReason, timeSpecification }) => {
+            
+                    ipcRenderer.send('get-time-and-reason-for-reminder', inputbox.value);
+            
+                    ipcRenderer.removeAllListeners('time-and-reason-for-reminder');
+                    ipcRenderer.on('time-and-reason-for-reminder', (event, { isReminder, isSleepy, reminderReason, timeSpecification }) => {
                         if (isReminder) {
                             speechbubble.style.visibility = 'hidden';
-                            // pet.src = 'assets/dog/ball.gif';
                             ipcRenderer.send('set-time-and-reason', { isReminder, isSleepy, reminderReason, timeSpecification });
                             ipcRenderer.send('console-log', `set-time-and-reason sent with: ${JSON.stringify({ isReminder, isSleepy, reminderReason, timeSpecification })}`);
                             input.style.visibility = 'visible';
                             inputbox.value = '';
                             caption.textContent = `Sure! I'll remind you to "${reminderReason}" in ${timeSpecification}.`;
                             ipcRenderer.send('stop-cycling-interval');
-                            
+            
                             ipcRenderer.removeListener('time-and-reason-for-reminder');
                             return; // Exit early if it is a reminder
                         }
-
-                        // if (isSleepy) {
-                            
-                        // }
-                    
-        
-                        // If it's not a reminder, run the rest of the code
+            
+                        if (isSleepy) {
+                            speechbubble.style.visibility = 'hidden';
+                            caption.textContent = "Oh, are you tired? Would you like to enable night light to reduce eye strain?";
+                            input.style.visibility = 'visible'; // Allow user to respond
+                            inputbox.value = '';
+            
+                            const handleSleepyResponse = (event) => {
+                                if (event.key === 'Enter') {
+                                    const userResponse = inputbox.value.toLowerCase().trim();
+                                    if (userResponse === 'yes') {
+                                        ipcRenderer.send('run-nightlight');
+                                        caption.textContent = "Night light enabled. Take care of your eyes!";
+                                        speechbubble.style.visibility = 'hidden';
+                                    } else {
+                                        caption.textContent = "Alright, let me know if you need anything else!";
+                                        speechbubble.style.visibility = 'hidden';
+                                    }
+                                    inputbox.value = '';
+                                    input.removeEventListener('keydown', handleSleepyResponse); // Remove the listener after handling
+                                }
+                            };
+            
+                            input.addEventListener('keydown', handleSleepyResponse);
+                            ipcRenderer.removeListener('time-and-reason-for-reminder');
+                            return; // Exit early if it is a sleepy case
+                        }
+            
+                        // If it's not a reminder or sleepy, run the rest of the chat code
                         ipcRenderer.send('chat', inputbox.value, '2rkbtvJYU45f6nVcrlfPlPpMDKXeRbusqadaYwCCA8w', '90bd3386-10b3-4ac6-baa4-fc2ecfbdd702');
                         console.log(inputbox.value);
                         input.style.visibility = 'hidden';
                         speechbubble.style.visibility = 'visible';
-                        // pet.src = 'assets/dog/interogative.gif';
-        
+            
                         // Stop cycling when a chat is initiated
                         stopCyclingInterval();
                     });
-                //     } else {
-                //         // If the input doesn't include "remind", run the original chat behavior
-                //         ipcRenderer.send('chat', inputbox.value, '2rkbtvJYU45f6nVcrlfPlPpMDKXeRbusqadaYwCCA8w', '90bd3386-10b3-4ac6-baa4-fc2ecfbdd702');
-                //         console.log(inputbox.value);
-                //         input.style.visibility = 'hidden';
-                //         speechbubble.style.visibility = 'visible';
-                //         // pet.src = 'assets/dog/interogative.gif';
-            
-                //         // Stop cycling when a chat is initiated
-                //         stopCyclingInterval();
-                //     }
                 }
             });
 
-            let currentAudio = null;
+            
 
             // Remove any existing listeners to prevent duplicate callbacks
-            // ipcRenderer.removeAllListeners('chat-reply');
+            ipcRenderer.removeAllListeners('chat-reply');
 
             // Attach the listener
             ipcRenderer.once('chat-reply', (event, { replyMessage, audioUrl }) => {
@@ -228,11 +227,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 if (audioUrl) {
                     // If there is already an audio playing, pause it
-                    if (currentAudio) {
-                        currentAudio.pause();
-                        currentAudio.currentTime = 0;
-                    }
-
                     // Create a new audio object and store it in currentAudio
                     currentAudio = new Audio(audioUrl);
                     currentAudio.play().catch((error) => {

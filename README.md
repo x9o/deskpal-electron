@@ -9,12 +9,11 @@ Days left: *11*    crap we gotta hurry I will do it after the career thing  - de
 - [x] AI chat
 - [x] Voice (c.ai built-in VC)
 - [x] Screen time reminders
-- [x] Integrate AI chat, like Siri i.e., "remind me in 5 mins for my ...."
+- [x] Integrate AI chat, like Siri. i.e., "remind me in 5 mins for my ...." -> sets a reminder in 5 mins. "i'm feeling tired." -> prompts user to enable night light
 - [x] Suitable AI (c.ai)
 - [x] Random prompte for encouragement/small reminders for stretching, etc
 - [x] Computer vision mood tracking (gives encouragment promots when detected negative sentiment)
 - [ ] ❓ Pupil detection (enable saturation when detected tired pupils. Yes/No prompt to enable night mode grt from shadcn or MUI)
-- [x] ‼️ Use magicloops api check for accessibility features for every message i.e. dark mode, hide pet, reminder
 - [x] ‼️ Dashboard fqor screen time reminder configuration
 - [ ] Fix duplicate callback bugs
     - [ ] Make sure that cycling random prompt does not interfere with other text changes (Use sideEffects from react)

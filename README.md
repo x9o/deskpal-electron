@@ -9,17 +9,18 @@ Days left: *11*    crap we gotta hurry I will do it after the career thing  - de
 - [x] AI chat
 - [x] Voice (c.ai built-in VC)
 - [x] Screen time reminders
-- [x] Integrate AI chat, like Siri. i.e., "remind me in 5 mins for my ...." -> sets a reminder in 5 mins. "i'm feeling tired." -> prompts user to enable night light
+- [x] Siri-like chat-command intergration . i.e., "remind me in 5 mins to go to sleep." -> sets a reminder in 5 mins for the specified reason. "i'm feeling tired." -> prompts user to enable night light. without using RE, uses LLM to process messqges
 - [x] Suitable AI (c.ai)
 - [x] Random prompte for encouragement/small reminders for stretching, etc
 - [x] Computer vision mood tracking (gives encouragment promots when detected negative sentiment)
-- [ ] ❓ Pupil detection (enable saturation when detected tired pupils. Yes/No prompt to enable night mode grt from shadcn or MUI)
+- [ ] ❓ Pupil detection (enable night light when detected tired pupils. Yes/No prompt to enable night mode, shadcn or MUI)
 - [x] ‼️ Dashboard fqor screen time reminder configuration
-- [ ] Fix duplicate callback bugs
-    - [ ] Make sure that cycling random prompt does not interfere with other text changes (Use sideEffects from react)
+- [x] Fix duplicate callback bugs
+    - [x] Make sure that cycling random prompt does not interfere with other text changes (Use sideEffects from react)
  - [ ] Basic algorithim and computer usage anaylsis  (train face data for mood detection, screentime analysis)
 - [x] Find/Create better assets
 - [ ] ‼️ Proposal
+- [ ] ‼️ Introduction in eng and chi
 - [ ] ‼️ 3 minute video
     - [ ] Think of new features
     - [ ] Safety features❓

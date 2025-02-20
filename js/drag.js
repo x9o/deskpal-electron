@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const pet = document.getElementById('pet');
     const settings = require('./settings.json');
 
-    if (settings['pet-movement-mode'] === 'cursor') {
+    if (settings['pet-movement-mode'] === 'cursor' || settings['pet-movement-mode'] === 'random') {
         return;
     }
 

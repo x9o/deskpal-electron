@@ -25,7 +25,7 @@ int main() {
     SetNightLight(true);  // Enable night light
 
     // Wait for 5 seconds (5000 milliseconds)
-    Sleep(5000);
+    Sleep(10000);
 
     std::cout << "Disabling night light..." << std::endl;
     SetNightLight(false);  // Disable night light

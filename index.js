@@ -76,6 +76,7 @@ function mainPet() {
     })
     .then((responseJson) => {
         const { isReminder, isSleepy, reminderReason, timeSpecification } = responseJson; // Destructure response
+        console.log(responseJson);
         event.reply('time-and-reason-for-reminder', { isReminder, isSleepy, reminderReason, timeSpecification });
     })
     .catch((error) => {

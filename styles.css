@@ -8,7 +8,7 @@ html, body {
 }
 
 #pet-container {
-  top: 100px; /* Initial position */
+  top: 100px;
   left: 100px;
   transform: translate(-50%, -50%);
   text-align: center;

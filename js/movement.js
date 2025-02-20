@@ -66,12 +66,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function randomMovement() {
         let isWalking = false;
+        let isMoving = false;
         let currentDirection = { x: 0, y: 0 };
         let currentWalkSpeed = 0;
-        const padding = 20;
+        const padding = 5;
+    
+        // Initial position of the pet
+        let currentPosX = 100;
+        let currentPosY = 100;
+    
+        const petContainer = document.getElementById("pet-container");
+        const petImage = document.getElementById("pet");
     
         function getRandomWalkSpeed() {
-            return 0.5 + Math.random() * 1.5; // Adjusted speed range
+            return 2 + Math.random() * 3; // Adjusted speed range (higher values for faster movement)
         }
     
         function getRandomDirection() {
@@ -88,17 +96,13 @@ document.addEventListener('DOMContentLoaded', () => {
             const viewportHeight = window.innerHeight;
     
             // Check if near the left or right boundary
-            if (rect.left < padding) {
-                currentDirection.x = Math.abs(currentDirection.x); // Move right
-            } else if (rect.right > viewportWidth - padding) {
-                currentDirection.x = -Math.abs(currentDirection.x); // Move left
+            if (rect.left < padding || rect.right > viewportWidth - padding) {
+                currentDirection.x = -currentDirection.x; // Reverse horizontal direction
             }
     
             // Check if near the top or bottom boundary
-            if (rect.top < padding) {
-                currentDirection.y = Math.abs(currentDirection.y); // Move down
-            } else if (rect.bottom > viewportHeight - padding) {
-                currentDirection.y = -Math.abs(currentDirection.y); // Move up
+            if (rect.top < padding || rect.bottom > viewportHeight - padding) {
+                currentDirection.y = -currentDirection.y; // Reverse vertical direction
             }
         }
     
@@ -107,32 +111,45 @@ document.addEventListener('DOMContentLoaded', () => {
             const viewportWidth = window.innerWidth;
             const viewportHeight = window.innerHeight;
     
+            let positionAdjusted = false;
+    
+            // Correct position if out of bounds
             if (rect.left < padding) {
                 currentPosX = padding;
-                return false;
+                positionAdjusted = true;
             }
             if (rect.right > viewportWidth - padding) {
                 currentPosX = viewportWidth - rect.width - padding;
-                return false;
+                positionAdjusted = true;
             }
     
             if (rect.top < padding) {
                 currentPosY = padding;
-                return false;
+                positionAdjusted = true;
             }
             if (rect.bottom > viewportHeight - padding) {
                 currentPosY = viewportHeight - rect.height - padding;
-                return false;
+                positionAdjusted = true;
             }
     
-            return true;
+            return !positionAdjusted;
+        }
+    
+        function normalizeDirection() {
+            const length = Math.sqrt(
+                currentDirection.x * currentDirection.x +
+                currentDirection.y * currentDirection.y
+            );
+            currentDirection.x /= length;
+            currentDirection.y /= length;
         }
     
         function startNewWalk() {
             currentDirection = getRandomDirection();
+            normalizeDirection();
             adjustDirectionIfNearBounds(); // Ensure direction is adjusted if near bounds
     
-            currentWalkSpeed = getRandomWalkSpeed();
+            currentWalkSpeed = 3
     
             isWalking = true;
             isMoving = true;
@@ -151,19 +168,22 @@ document.addEventListener('DOMContentLoaded', () => {
                 const prevPosX = currentPosX;
                 const prevPosY = currentPosY;
     
+                // Update position
                 currentPosX += currentDirection.x * currentWalkSpeed;
                 currentPosY += currentDirection.y * currentWalkSpeed;
     
+                // Apply the new position
                 petContainer.style.transform = `translate(${currentPosX}px, ${currentPosY}px)`;
     
+                // Check bounds
                 if (!keepInBounds()) {
-                    currentDirection.x *= -1;
-                    currentDirection.y *= -1;
+                    // If the pet hits a boundary, reverse direction and reset position
+                    adjustDirectionIfNearBounds();
                     currentPosX = prevPosX;
                     currentPosY = prevPosY;
                 }
             }
-            requestAnimationFrame(walk);
+            requestAnimationFrame(walk); // Continue the animation loop
         }
     
         startNewWalk();
@@ -173,7 +193,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!isWalking) {
                 startNewWalk();
             }
-        }, 3000 + Math.random() * 5000); // Adjusted interval
+        }, 3000 + Math.random() * 5000); // Adjusted interval for the next walk
     }
 
     if (settings['pet-movement-mode'] === 'cursor') {

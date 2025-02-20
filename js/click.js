@@ -126,9 +126,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     ipcRenderer.on('stop-cycling-interval', () => {
         stopCyclingInterval();
-        setTimeout(() => {
-            startCyclingInterval();
-        }, 5000);
+        // setTimeout(() => {
+        //     startCyclingInterval();
+        // }, 5000);
     });
 
     startCyclingInterval();
@@ -145,7 +145,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             
             input.addEventListener('keydown', (event) => {
-                if (event.key === 'Enter') {
+                if ((event.key === 'Enter') && (inputbox.value != '')) {
                     speechbubble.style.visibility = 'visible';
                     input.style.visibility = 'hidden';
             
@@ -167,8 +167,9 @@ document.addEventListener('DOMContentLoaded', () => {
                         }
             
                         if (isSleepy) {
+                            const originalmessage = inputbox.value;
                             speechbubble.style.visibility = 'hidden';
-                            caption.textContent = "Oh, are you tired? Would you like to enable night light to reduce eye strain?";
+                            caption.textContent = "Oh, are you tired? Would you like to enable night light to reduce eye strain? (yes/no)";
                             input.style.visibility = 'visible'; // Allow user to respond
                             inputbox.value = '';
             
@@ -180,10 +181,15 @@ document.addEventListener('DOMContentLoaded', () => {
                                         caption.textContent = "Night light enabled. Take care of your eyes!";
                                         speechbubble.style.visibility = 'hidden';
                                     } else {
-                                        caption.textContent = "Alright, let me know if you need anything else!";
-                                        speechbubble.style.visibility = 'hidden';
+                                        // Process the original input message
+                                        caption.textContent = "Alright, let's continue!";
+                                        ipcRenderer.send('chat', originalmessage, '2rkbtvJYU45f6nVcrlfPlPpMDKXeRbusqadaYwCCA8w', '90bd3386-10b3-4ac6-baa4-fc2ecfbdd702');
+                                        console.log(inputbox.value);
+                                        speechbubble.style.visibility = 'visible';
                                     }
-                                    inputbox.value = '';
+            
+                                    inputbox.value = ''; // Clear the input box
+                                    input.style.visibility = 'hidden';
                                     input.removeEventListener('keydown', handleSleepyResponse); // Remove the listener after handling
                                 }
                             };

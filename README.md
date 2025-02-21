@@ -1,6 +1,6 @@
 # todolist
 
-Days left: *11*    crap we gotta hurry I will do it after the career thing  - debianlam
+
 
 
 

@@ -19,19 +19,13 @@
 - [x] Make sure that cycling random prompt does not interfere with other text changes (Use sideEffects from react)
  - [ ] Basic algorithim and computer usage anaylsis  (train face data for mood detection, screentime analysis)
 - [x] Find/Create better assets
-- [ ] ‼️ Proposal
-- [ ] ‼️ Introduction in eng and chi
-- [ ] ‼️ 3 minute video
     - [ ] Think of new features
     - [ ] Safety features❓
-    - [x] debianlam on top
     - [ ] Better movement and accessibility
      
 
 
-    - [x] Sophie Lou wtf how did she get 1st place
-    - [x] How did SPCC win last year like wtf that ain't even pro
-    - [x] rigged ahh contest
+ 
 
 # notes
 
@@ -58,4 +52,4 @@ debianlam - ~~nothing~~   I did front end
 
 siri api
 
-https://magicloops.dev/api/loop/f55c214b-e2c7-40fb-882c-fac1f6d0c7f2/run?command=remind+me+in+5+minutes+for+my+dog+walking
+https://magicloops.dev/api/loop/f55c214b-e2c7-40fb-882c-fac1f6d0c7f2/run?

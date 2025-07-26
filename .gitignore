@@ -1,0 +1,16 @@
+
+settings_python.json
+
+
+node_modules/
+
+api_old.py
+
+assets/
+
+menus/resources/
+
+shape_predictor_68_face_landmarks.dat
+eyestress.py
+
+nightlight.exe

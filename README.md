@@ -19,14 +19,14 @@ todolist
         Safety features❓
         Better movement and accessibility
 
-notes
-contrivutors
+notes <br>
+contrivutors<br>
 
 x9o
 
 deblm
-links
+links<br>
 
-siri api
+siri api<br>
 
 https://magicloops.dev/api/loop/f55c214b-e2c7-40fb-882c-fac1f6d0c7f2/run?
